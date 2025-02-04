@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Test.BlazeLoginTest">
+      <class name="Test.AmazonTest">
         <methods>
-          <include name="URLLoading"/>
-          <include name="set"/>
+          <include name="URLLoadind"/>
           <include name="test"/>
+          <include name="setup"/>
         </methods>
-      </class> <!-- Test.BlazeLoginTest -->
+      </class> <!-- Test.AmazonTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -6,11 +6,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import Page.BlazeRegisterPage;
+import Page.AmazonPage;
 
-
-public class BlazeRegistTest {
+public class AmazonTest {
 	WebDriver driver;
+	
 
 	@BeforeTest
 	public void setup()
@@ -22,16 +22,16 @@ public class BlazeRegistTest {
 	@BeforeMethod
 	public void URLLoadind()
 	{
-		 driver.get("https://blazedemo.com/register");
+		 driver.get("https://www.amazon.in/");
 	}
 	@Test
-	public void test()
+	public void test() throws Throwable
 	{
-	BlazeRegisterPage ob =  new BlazeRegisterPage(driver);
-	ob.setvalue("Resmi", "Lumi", "abc@gmail", "bmbm", "jh");
-	ob.login();
-	
-
+		AmazonPage ob = new AmazonPage(driver);
+		ob.TitleCHK();
+		ob.login();
+		ob.LinkVerify();
+		ob.windowHandling();
+		
 	}
-
 }
