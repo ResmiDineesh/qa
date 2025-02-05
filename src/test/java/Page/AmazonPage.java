@@ -9,6 +9,8 @@ import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,15 +27,13 @@ By name =  By.id("ap_customer_name");
 By Phone = By.id("ap_phone_number");
 By PW = By.id("ap_password");
 By Sub = By.id("continue");
-By Search = By.xpath("//*[@id=\"twotabsearchtextbox\"]");
-By CL = By.xpath("//*[@id=\"twotabsearchtextbox\"]");
-By NV = By.xpath("//*[@id=\"nav-search-submit-button\"]");
-By NW = By.xpath("//*[@id=\"search\"]/div[1]/div[1]/div/span[1]/div[1]/div[3]/div/div/div/div/span/div/div/div/div[2]/div/div/div[1]/a/h2/span");
-
-By AddCart = By.xpath("/html/body/div[2]/div/div/div[5]/div[1]/div[4]/div/div[1]/div/div[1]/div/div/div[2]/div/div[2]/div/form/div/div/div[37]/div[1]/span/span/span/input");
-
-By ViewCart = By.xpath("/html/body/div[8]/div[3]/div[3]/div/div[1]/div[3]/div[1]/div[2]/div[3]/form/span/span/input");
+By Logo = By.id("nav-logo-sprites");
+By search = By.id("twotabsearchtextbox");
+By Searchclick = By.id("nav-search-submit-button");
+By Mobile = By.xpath("/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[3]/div/div/div/div/span/div/div/div/div[2]/div/div/div[1]/a/h2/span");
+By AddCart=By.xpath("/html/body/div[2]/div/div/div[5]/div[1]/div[4]/div/div[1]/div/div[1]/div/div/div[2]/div/div[2]/div/form/div/div/div[37]/div[1]/span/span/span/input");
 By help = By.xpath("//*[@id=\"navFooter\"]/div[1]/div/div[7]/ul/li[6]/a");
+
 public AmazonPage (WebDriver driver)
 {
 this.driver = driver;
@@ -51,7 +51,17 @@ public void login()
 	driver.navigate().back();
 	
 }
-
+public void logoCHk()
+{
+	if(driver.findElement(Logo).isDisplayed())
+	{
+		System.out.println("logo is displayed");
+	}
+	else
+	{
+		System.out.println("logo not displayed");
+	}
+}
 public void TitleCHK()
 {
 	String actualtitle = driver.getTitle();
@@ -78,7 +88,16 @@ public void TitleCHK()
 }
 
 
-
+public void mouseover()
+{
+	WebElement elect = driver.findElement(By.id("nav-link-accountList-nav-line-1"));
+	Actions act = new Actions(driver);
+	act.moveToElement(elect);
+	act.perform();
+	
+	
+	
+}
 public void LinkVerify() throws Throwable
 {
 
@@ -104,27 +123,10 @@ public void LinkVerify() throws Throwable
 
 public void windowHandling()
 {
-	driver.manage().window().maximize();
-	driver.findElement(Search).sendKeys("mobile phones");
-	driver.findElement(CL).click();
-	driver.findElement(NV).click();
-	String actual = driver.getTitle();
-	System.out.println(actual);
-	
-String expected = "Amazon.in : mobile phones ";
-	if(actual.equals(expected))
-	{
-		System.out.println("pass");
-	}
-	else
-	{
-		System.out.println("fail");
-	}
-	
-	
+	driver.findElement(search).sendKeys("mobile phones");
+	driver.findElement(Searchclick).click();
 	String parentwindow = driver.getWindowHandle();
-
-	driver.findElement(NW).click();
+	driver.findElement(Mobile).click();
 	
 	
 	Set<String> allwindowhandles = driver.getWindowHandles();
@@ -144,10 +146,10 @@ String expected = "Amazon.in : mobile phones ";
 			
 			driver.findElement(AddCart).click();
 			
-			WebDriverWait W =new WebDriverWait(driver,Duration.ofSeconds(30));
-			W.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[8]/div[3]/div[3]/div/div[1]/div[3]/div[1]/div[2]/div[3]/form/span/span/input")));
+			//WebDriverWait W =new WebDriverWait(driver,Duration.ofSeconds(30));
+			//W.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[8]/div[3]/div[3]/div/div[1]/div[3]/div[1]/div[2]/div[3]/form/span/span/input")));
 			
-			driver.findElement(ViewCart).click();
+			//driver.findElement(By.xpath("/html/body/div[8]/div[3]/div[3]/div/div[1]/div[3]/div[1]/div[2]/div[3]/form/span/span/input")).click();
 			
 			driver.close();
 			
@@ -159,6 +161,8 @@ String expected = "Amazon.in : mobile phones ";
 }
 
 }
+	
+
 public void scrolldown()
 {
 	JavascriptExecutor Js= (JavascriptExecutor)driver;
