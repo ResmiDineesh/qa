@@ -27,11 +27,16 @@ public class AmazonTest {
 	@Test
 	public void test() throws Throwable
 	{
+		driver.manage().window().maximize();
 		AmazonPage ob = new AmazonPage(driver);
-		ob.TitleCHK();
+
 		ob.login();
+		ob.mouseover();
+		ob.TitleCHK();
 		ob.LinkVerify();
+		ob.logoCHk();
 		ob.windowHandling();
+		ob.scrolldown();
 		
 	}
 }
